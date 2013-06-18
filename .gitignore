@@ -1,0 +1,9 @@
+*.log
+*.pot
+*.pyc
+local_settings.py
+temp
+venv
+static_collects
+ccp.sublime-project
+ccp.sublime-workspace
