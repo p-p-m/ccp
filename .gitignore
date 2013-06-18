@@ -7,3 +7,4 @@ venv
 static_collects
 ccp.sublime-project
 ccp.sublime-workspace
+ccp.db
