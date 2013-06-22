@@ -78,6 +78,11 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
 
+FIXTURE_DIRS = (
+    os.path.join(ROOT_PATH, 'bio', 'fixtures'),
+    os.path.join(PROJECT_PATH, 'fixtures'),
+)
+
 # Location of templates
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
