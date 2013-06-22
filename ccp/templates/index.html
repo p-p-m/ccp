@@ -1,1 +1,21 @@
-hi
+{% extends 'base.html' %}
+{% block pagestyles %}
+    <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block content %}
+    <h3> 42 Coffee Cups Test Assignment </h3>
+    <hr>
+    <div class='left' align='left'>
+        <p> Name: {{ pd.name }} </p>
+        <p> Surname: {{ pd.surname }} </p>
+        <p> Birthdate: {{ pd.birthdate }} </p>
+        <p> Bio:<br/> {{ pd.bio }} </p>
+    </div>
+    <div class='left' align='left'>
+        <p><b> Contacts: </b></p>
+        <p> Skype: {{ pd.skype }} </p>
+        <p> Email: {{ pd.email }} </p>
+        <p> Jabber: {{ pd.jabber }} </p>
+        <p> Other Contacts: {{ pd.other_contacts }} </p>
+    </div>
+{% endblock %}

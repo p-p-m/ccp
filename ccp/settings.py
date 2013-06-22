@@ -128,7 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     # my apps
-    # 'bio',
+    'bio',
     # installed apps
     'south',
     'django_nose',

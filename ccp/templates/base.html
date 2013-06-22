@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+   <meta charset="utf-8" />
+   <title>{% block title %} 42cc - test {% endblock %}</title>
+   <!-- GLOBAL CSS HERE -->
+   <!-- END GLOBAL CSS-->
+   {% block pagestyles %}{% endblock %}
+   {% block headerparams %}{% endblock %}
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
+    <!-- BEGIN JAVASCRIPTS-->
+    <!-- BEGIN CORE PLUGINS -->
+    <!-- END CORE PLUGINS -->
+    {% block javascript %}{% endblock %}
+    <!-- END JAVASCRIPTS -->
+</body>

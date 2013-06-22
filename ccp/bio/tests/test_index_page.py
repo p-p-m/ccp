@@ -11,7 +11,7 @@ class TestIndexPage(TestCase):
     mydata_fields = {
         'name': 'Pavel',
         'surname': 'Marchuk',
-        'birthdate': datetime.strptime('02.01.1990', '%d.%m.%Y'),
+        'birthdate': datetime.strptime('02.01.1990', '%d.%m.%Y').date(),
         'bio': 'Ended NTUU KPI. Now working at plasticjam',
         'email': 'marchukpavelp@gmail.com',
         'skype': 'zim.inv',
@@ -27,6 +27,7 @@ class TestIndexPage(TestCase):
     def test_personal_data_on_index_page(self):
         response = self.client.get(reverse('index'))
         self.assertEqual(response.status_code, 200)
+        self.mydata_fields['birthdate'] = 'Jan. 2, 1990'
         for field, value in self.mydata_fields.items():
-            self.assertContains(response, field)
+            self.assertContains(response, field.title().replace('_', ' '))
             self.assertContains(response, value)

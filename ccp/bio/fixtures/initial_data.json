@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "bio.personaldata", "fields": {"surname": "Marchuk", "name": "Pavel", "jabber": "pavel@khavr.com", "birthdate": "1990-01-02", "skype": "zim.inv", "other_contacts": "-", "email": "marchukpavelp@gmail.com", "bio": "Ended NTUU KPI. Now working at plasticjam"}}]
