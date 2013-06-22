@@ -5,9 +5,7 @@ import sys
 ROOT_PATH = os.path.realpath(os.path.dirname(__file__))  # path to python ccp
 PROJECT_PATH = os.path.dirname(ROOT_PATH)  # path to ccp project
 
-print sys.path
 sys.path.append(ROOT_PATH)
-print sys.path
 
 ADMINS = (
     ('Pavel', 'marchukpavelp@gmail.com'),
