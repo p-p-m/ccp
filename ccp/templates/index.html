@@ -2,9 +2,10 @@
 {% block pagestyles %}
     <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
+{% block contenttitle %}
+     42 Coffee Cups Test Assignment
+{% endblock %}
 {% block content %}
-    <h3> 42 Coffee Cups Test Assignment </h3>
-    <hr>
     <div class='left' align='left'>
         <p> Name: {{ pd.name }} </p>
         <p> Surname: {{ pd.surname }} </p>
