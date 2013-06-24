@@ -119,6 +119,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'bio.middleware.StoreRequest',
 )
 
 ROOT_URLCONF = 'urls'

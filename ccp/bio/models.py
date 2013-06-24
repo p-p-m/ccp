@@ -10,3 +10,13 @@ class PersonalData(models.Model):
     skype = models.CharField(max_length=50)
     other_contacts = models.CharField(max_length=200)
     jabber = models.CharField(max_length=50)
+
+
+class Request(models.Model):
+    meta = models.CharField(max_length=2000)
+    body = models.CharField(max_length=2000)
+    path = models.CharField(max_length=500)
+    date_added = models.DateField(auto_now_add=True)
+
+    class Meta:
+        get_latest_by = "date_added"

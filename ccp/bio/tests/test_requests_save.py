@@ -11,10 +11,11 @@ class TestRequestsInDB(TestCase):
     def test_request_storage(self):
         response = self.client.get(reverse('index'))
         stored_request = Request.objects.latest()
-        for at in self.request_stored_fields:
-            stored = getattr(stored_request, at.lower())
-            sent = getattr(response.request, at)
-            self.assertEqual(stored, sent)
+        print response.request
+        for at in ('REQUEST_METHOD', 'PATH_INFO', 'CONTENT_TYPE', 'QUERY_STRING'):
+            field = ':'.join([at, response.request[at]])
+            self.assertIn(stored_request.meta, field)
+        self.assertEqual(stored_request.path, response.request['PATH_INFO'])
 
     def test_requets_page(self):
         response = self.client.get(reverse('requests'))
