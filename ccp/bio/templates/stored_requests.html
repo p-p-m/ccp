@@ -6,15 +6,15 @@
         <tr>
             <th> Date added </th>
             <th> META </th>
-            <th> body </th>
             <th> path </th>
+            <th> body </th>
         </tr>
         {% for r in stored_requests %}
         <tr>
             <td> {{ r.date_added }} </td>
             <td><textarea rows="10" cols="45" name="text"> {{ r.meta }} </textarea></td>
-            <td> {{ t.body }} </td>
-            <td> {{ t.path }} </td>
+            <td> {{ r.path }} </td>
+            <td> {{ r.body }} </td>
         </tr>
         {% endfor %}
     </table>

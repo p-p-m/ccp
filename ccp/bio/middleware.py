@@ -10,4 +10,5 @@ class StoreRequest(object):
         stored_request = Request()
         for f in ('META', 'path', 'body'):
             setattr(stored_request, f.lower(), getattr(request, f))
+        stored_request.path = str(request.path)
         stored_request.save()

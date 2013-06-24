@@ -10,6 +10,4 @@ def personal_data(request):
 
 def stored_requests(request):
     latest = Request.objects.order_by('-date_added').all()
-    for l in latest:
-        print l.meta
     return render(request, 'stored_requests.html', {'stored_requests': latest})

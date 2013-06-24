@@ -16,7 +16,7 @@ class Request(models.Model):
     meta = models.CharField(max_length=2000)
     body = models.CharField(max_length=2000)
     path = models.CharField(max_length=500)
-    date_added = models.DateField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         get_latest_by = "date_added"
