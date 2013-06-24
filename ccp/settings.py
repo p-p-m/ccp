@@ -91,9 +91,7 @@ TEMPLATE_DIRS = (
     os.path.join(ROOT_PATH, 'templates'),
 )
 
-# FIXTURE_DIRS = (
-#     os.path.join(PROJECT_PATH, 'fixtures'),
-# )
+FORCE_SCRIPT_NAME = ''
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -119,6 +117,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'bio.middleware.StoreRequest',
 )
 
 ROOT_URLCONF = 'urls'

@@ -10,5 +10,5 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     # pages:
-    url(r'^', include('bio.urls')),
+    url(r'', include('bio.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
