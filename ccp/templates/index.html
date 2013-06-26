@@ -2,25 +2,37 @@
 {% block pagestyles %}
     <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
-{% block contenttitle %}
-     42 Coffee Cups Test Assignment
-{% endblock %}
 {% block content %}
+    <h3 class = 'header'>42 Coffee Cups Test Assignment</h3>
+    <div class = 'headerlink'>
+        {% if request.user.is_authenticated %}
+        <a href="{% url personal_data_update %}">edit data</a>
+        {% else %}
+        <a href="{% url login %}">login</a>
+        {% endif %}
+    </div>
+    <hr class = 'middle'/>
     <div class='left' align='left'>
         <p> Name: {{ pd.name }} </p>
         <p> Surname: {{ pd.surname }} </p>
         <p> Birthdate: {{ pd.birthdate }} </p>
-        <p> Bio:<br/> {{ pd.bio }} </p>
     </div>
     <div class='left' align='left'>
         <p><b> Contacts: </b></p>
         <p> Skype: {{ pd.skype }} </p>
         <p> Email: {{ pd.email }} </p>
         <p> Jabber: {{ pd.jabber }} </p>
-        <p> Other Contacts: {{ pd.other_contacts }} </p>
+    </div>
+    <div class='left' align='left'>
+        <p><b> Photo: </b></p>
+        <p><img src="{{ MEDIA_URL }}{{ pd.photo }}"/></p>
+    </div>
+    <div class='left' align='left'>
+        <p> Bio:<br/> {{ pd.bio }} </p>
+        <p> Other Contacts:<br/> {{ pd.other_contacts }} </p>
     </div>
     <div class='middle'>
         <hr>
-        <a href = {% url stored_requests %}>requests</a>
+        <a href = "{% url stored_requests %}">requests</a>
     </div>
 {% endblock %}
