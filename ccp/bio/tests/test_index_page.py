@@ -31,6 +31,3 @@ class TestIndexPage(TestCase):
         for field, value in self.mydata_fields.items():
             self.assertContains(response, field.title().replace('_', ' '))
             self.assertContains(response, value)
-        # test photo on page:
-        self.assertIn('myphoto', response.context)
-        self.assertContains(response, 'img')
