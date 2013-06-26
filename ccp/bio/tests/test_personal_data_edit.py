@@ -26,9 +26,11 @@ class TestIndexPage(TestCase):
 
     pdurl = reverse('personal_data_update')
 
-    def _user(self):
-        return User.objects.create_user(
+    def _login_user(self):
+        User.objects.create_user(
             username='artur', password='dent', email='artur@i.ua')
+        self.assertTrue(
+            self.client.login(username='artur', password='dent'))
 
     def test_personal_data_form(self):
         form = PersonalDataForm(data=self.new_form_fields)
@@ -47,9 +49,7 @@ class TestIndexPage(TestCase):
             self.assertRedirects(response, reverse('login') + '?next=/personal-data/update/')
 
     def test_logged_get_request(self):
-        self._user()
-        self.assertTrue(
-            self.client.login(username='artur', password='dent'))
+        self._login_user()
         response = self.client.get(self.pdurl)
         self.assertEqual(response.status_code, 200)
         self.assertIn('form', response.context)
@@ -58,9 +58,7 @@ class TestIndexPage(TestCase):
             self.assertContains(response, getattr(mydata, f.name))
 
     def test_logged_post_request(self):
-        self._user()
-        self.assertTrue(
-            self.client.login(username='artur', password='dent'))
+        self._login_user()
         response = self.client.post(self.pdurl, data=self.new_form_fields)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Personal data were successfully saved')
@@ -69,9 +67,7 @@ class TestIndexPage(TestCase):
             self.assertEqual(getattr(mydata, field), value)
 
     def test_change_photo_request(self):
-        self._user()
-        self.assertTrue(
-            self.client.login(username='artur', password='dent'))
+        self._login_user()
         # creating file:
         f = open(str(uuid.uuid4()) + '.jpeg', 'w+')
         f.write('test_image')
