@@ -23,6 +23,17 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher',
+)
+
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -159,14 +170,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # registration settings:
 
-# LOGIN_REDIRECT_URL = '/'
-# LOGIN_URL = '/sign-in/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
 # LOGIN_ERROR_URL = '/login-error/'
-ACCOUNT_ACTIVATION_DAYS = 7  # days before activetion expires
-
-AUTHENTICATION_BACKENDS = (
-    'registration_email.auth.EmailBackend',
-)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

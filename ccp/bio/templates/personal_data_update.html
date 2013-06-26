@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block pagestyles %}
+    <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block content %}
+    <h3 class = 'header'>42 Coffee Cups Test Assignment</h3>
+    <hr class = 'middle'/>
+    {% if is_saved %}
+        Personal data were successfully saved
+    {% endif %}
+    <form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+        <div class='left' align='left'>
+            <p> Name: {{ form.name }} </p>
+            <p> Surname: {{ form.surname }} </p>
+            <p> Birthdate: {{ form.birthdate }} </p>
+            <p> Photo: {{ form.photo }} </p>
+        </div>
+        <div class='left' align='left' style='height:250px'>
+            <p><b> Contacts: </b></p>
+            <p> Skype: {{ form.skype }} </p>
+            <p> Email: {{ form.email }} </p>
+            <p> Jabber: {{ form.jabber }} </p>
+        </div>
+        <div class='left' align='left'>
+            <p><img src="{{ MEDIA_URL }}{{ photo }}"/></p>
+        </div>
+        <div class='left' align='left'>
+            <p> Bio:<br/> {{ form.bio }} </p>
+            <p> Other Contacts:<br/> {{ form.other_contacts }} </p>
+        </div>
+        <div class='middle'>
+            <input type='submit' value='Save'> &nbsp; &nbsp;
+            <a href='/'>Cancel</a>
+        </div>
+    </form>
+    <div class='middle'>
+        <hr>
+        <a href = "{% url stored_requests %}">requests</a>
+    </div>
+
+{% endblock %}

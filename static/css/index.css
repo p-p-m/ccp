@@ -2,8 +2,18 @@
 background-color: #FFF;
 padding: 5px;
 float: left;
-width: 500px;
+width: 45%;
 }
 .middle {
     clear: both;
+}
+.header {
+    float: left;
+    padding-left: 20px;
+    padding-right: 60px;
+}
+.headerlink{
+    float:left;
+    height:60px;
+    line-height: 60px;
 }

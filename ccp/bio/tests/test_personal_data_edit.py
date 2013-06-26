@@ -44,7 +44,7 @@ class TestIndexPage(TestCase):
         ''' Testing request from not logged in user '''
         for method in 'get', 'post':
             response = getattr(self.client, method)(self.pdurl)
-            self.assertRedirects(response, reverse('login'))
+            self.assertRedirects(response, reverse('login') + '?next=/personal-data/update/')
 
     def test_logged_get_request(self):
         self._user()
@@ -63,7 +63,7 @@ class TestIndexPage(TestCase):
             self.client.login(username='artur', password='dent'))
         response = self.client.post(self.pdurl, data=self.new_form_fields)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'personal data were successfully saved')
+        self.assertContains(response, 'Personal data were successfully saved')
         mydata = PersonalData.objects.get(id=1)
         for field, value in self.new_form_fields.items():
             self.assertEqual(getattr(mydata, field), value)
@@ -73,7 +73,7 @@ class TestIndexPage(TestCase):
         self.assertTrue(
             self.client.login(username='artur', password='dent'))
         # creating file:
-        f = open(os.path.join('bio', 'tests', str(uuid.uuid4()) + '.jpeg'), 'w+')
+        f = open(str(uuid.uuid4()) + '.jpeg', 'w+')
         f.write('test_image')
         f.close()
         # testing file:
@@ -83,6 +83,7 @@ class TestIndexPage(TestCase):
         self.assertEqual(response.status_code, 200)
         mydata = PersonalData.objects.get(id=1)
         self.assertEqual(mydata.photo, 'myphoto/' + os.path.basename(f.name))
+        del self.new_form_fields['photo']
         f.close()
         os.remove(f.name)
         os.remove(os.path.join(settings.MEDIA_ROOT, 'myphoto', os.path.basename(f.name)))
