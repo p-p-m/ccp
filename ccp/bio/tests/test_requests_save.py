@@ -16,12 +16,13 @@ class TestRequestsInDB(TestCase):
         self.assertEqual(stored_request.path, response.request['PATH_INFO'])
 
     def test_requets_page(self):
-        response = self.client.get(reverse('stored_requests'))
-        self.assertEqual(response.status_code, 200)
-        for at in ('REQUEST_METHOD', 'PATH_INFO', 'CONTENT_TYPE', 'QUERY_STRING'):
-            self.assertContains(response, response.request[at])
+        for i in range(11):
+            response = self.client.get(reverse('stored_requests'))
+            self.assertEqual(response.status_code, 200)
+            for at in ('REQUEST_METHOD', 'PATH_INFO', 'CONTENT_TYPE', 'QUERY_STRING'):
+                self.assertContains(response, response.request[at])
 
-        latest_requests = Request.objects.order_by('-date_added')[:10]
-        for req in latest_requests:
-            for attr in ('meta', 'body', 'path'):
+        first_requests = Request.objects.order_by('date_added')[:10]
+        for req in first_requests:
+            for attr in ('meta', 'path'):
                 self.assertContains(response, escape(getattr(req, attr)))

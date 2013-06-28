@@ -11,7 +11,7 @@ def personal_data(request):
 
 
 def stored_requests(request):
-    latest = Request.objects.order_by('-date_added')[:10]
+    latest = Request.objects.order_by('date_added')[:10]
     return render(request, 'stored_requests.html', {'stored_requests': latest})
 
 

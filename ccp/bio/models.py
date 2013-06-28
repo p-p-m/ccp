@@ -14,8 +14,7 @@ class PersonalData(models.Model):
 
 
 class Request(models.Model):
-    meta = models.CharField(max_length=2000)
-    body = models.CharField(max_length=2000)
+    meta = models.TextField()
     path = models.CharField(max_length=500)
     date_added = models.DateTimeField(auto_now_add=True)
 
