@@ -19,7 +19,7 @@ def stored_requests(request):
 def personal_data_update(request):
     form = PersonalDataForm(request.POST or None, files=request.FILES or None)
     is_saved = False
-    if form.is_valid():
+    if form.is_valid() and request.is_ajax():
         form.save()
         is_saved = True
     photo = PersonalData.objects.get(id=1).photo
