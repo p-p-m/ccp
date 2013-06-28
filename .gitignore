@@ -5,6 +5,7 @@
 local_settings.py
 temp
 venv
+media
 static_collects
 ccp.sublime-project
 ccp.sublime-workspace
