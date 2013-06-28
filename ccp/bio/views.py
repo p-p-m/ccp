@@ -5,9 +5,6 @@ from models import PersonalData, Request
 from forms import PersonalDataForm
 
 
-def test_asd():
-    assert 1 == 2
-
 def personal_data(request):
     pd = PersonalData.objects.get(id=1)
     return render(request, 'index.html', {'pd': pd})
