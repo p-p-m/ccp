@@ -1,36 +1,15 @@
 {% extends 'base.html' %}
 {% block pagestyles %}
-    <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
+  <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+{% endblock %}
+{% block headerparams %}
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 {% endblock %}
 {% block content %}
 
-    <script type="text/javascript" 
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script type="text/javascript">
-          /*<![CDATA[*/
-          jQuery(function() {
-              var form = jQuery("#contactform");
-              form.submit(function(e) {
-                  jQuery("#sendbutton").attr('disabled', true)
-                  form.find('input').attr('disabled', true);
-                  form.find('textarea').attr('disabled', true);
-
-                  jQuery("#sendwrapper").prepend('<span>Sending message, please wait... </span>')
-                  jQuery("#ajaxwrapper").load(
-                      form.attr('action') + ' #ajaxwrapper',
-                      form.serializeArray(),
-                      function(responseText, responseStatus) {
-                          jQuery("#sendbutton").attr('disabled', false);
-                          form.find('input').attr('disabled', false);
-                          form.find('textarea').attr('disabled', false);
-                          jQuery("#sendwrapper").find('span').remove();
-                      }
-                  );
-                  e.preventDefault(); 
-              });
-          });
-          /*]]>*/
-      </script>
+    
 
     <h3 class = 'header'>42 Coffee Cups Test Assignment</h3>
     <hr class = 'middle'/>
@@ -69,4 +48,9 @@
         <a href = "{% url stored_requests %}">requests</a>
     </div>
 
+{% endblock %}
+{% block javascript %}
+      <script src='{{ STATIC_URL }}js/ajax_form.js'>
+          
+      </script>
 {% endblock %}
