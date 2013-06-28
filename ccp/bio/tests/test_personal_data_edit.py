@@ -16,7 +16,7 @@ class TestIndexPage(TestCase):
     new_form_fields = {
         'name': 'Pavel2',
         'surname': 'Marchuk2',
-        'birthdate': datetime.strptime('02.02.1990', '%d.%m.%Y').date(),
+        'birthdate': datetime.strptime('02/02/1990', '%m/%d/%Y').date(),
         'bio': 'Ended NTUU KPI. Now working at plasticjam2',
         'email': 'marchukpavelp2@gmail.com',
         'skype': 'zim.inv2',
@@ -54,6 +54,7 @@ class TestIndexPage(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('form', response.context)
         mydata = PersonalData.objects.get(id=1)
+        mydata.birthdate = mydata.birthdate.strftime('%m/%d/%Y')
         for f in PersonalData._meta.fields:
             self.assertContains(response, getattr(mydata, f.name))
 
