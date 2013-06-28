@@ -8,12 +8,12 @@
     <div class = 'headerlink'>
         {% if request.user.is_authenticated %}
         <a href="{% url personal_data_update %}">edit data</a>
-        {% else %}
-        <a href="{% url login %}">login</a>
-        {% endif %}
         <a href="{% edit_link request.user %}">
             (admin)
         </a>
+        {% else %}
+        <a href="{% url login %}">login</a>
+        {% endif %}
     </div>
     <hr class = 'middle'/>
     <div class='left' align='left'>
