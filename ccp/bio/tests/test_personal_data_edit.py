@@ -50,7 +50,8 @@ class TestIndexPage(TestCase):
 
     def test_logged_get_request(self):
         self._login_user()
-        response = self.client.get(self.pdurl)
+        response = self.client.get(
+            self.pdurl, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertIn('form', response.context)
         mydata = PersonalData.objects.get(id=1)
