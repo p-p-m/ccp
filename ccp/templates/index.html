@@ -3,6 +3,7 @@
     <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
 {% block content %}
+    {% load admin_edit_tags %}
     <h3 class = 'header'>42 Coffee Cups Test Assignment</h3>
     <div class = 'headerlink'>
         {% if request.user.is_authenticated %}
@@ -10,6 +11,9 @@
         {% else %}
         <a href="{% url login %}">login</a>
         {% endif %}
+        <a href="{% edit_link request.user %}">
+            (admin)
+        </a>
     </div>
     <hr class = 'middle'/>
     <div class='left' align='left'>
