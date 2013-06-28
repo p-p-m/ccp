@@ -16,7 +16,7 @@ class TestIndexPage(TestCase):
     new_form_fields = {
         'name': 'Pavel2',
         'surname': 'Marchuk2',
-        'birthdate': datetime.strptime('02.02.1990', '%d.%m.%Y').date(),
+        'birthdate': datetime.strptime('02/02/1990', '%m/%d/%Y').date(),
         'bio': 'Ended NTUU KPI. Now working at plasticjam2',
         'email': 'marchukpavelp2@gmail.com',
         'skype': 'zim.inv2',
@@ -54,14 +54,17 @@ class TestIndexPage(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('form', response.context)
         mydata = PersonalData.objects.get(id=1)
+        mydata.birthdate = mydata.birthdate.strftime('%m/%d/%Y')
         for f in PersonalData._meta.fields:
             self.assertContains(response, getattr(mydata, f.name))
 
     def test_logged_post_request(self):
         self._login_user()
-        response = self.client.post(self.pdurl, data=self.new_form_fields)
+        response = self.client.post(
+            self.pdurl, data=self.new_form_fields,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Personal data were successfully saved')
+        # self.assertContains(response, 'Personal data were successfully saved')
         mydata = PersonalData.objects.get(id=1)
         for field, value in self.new_form_fields.items():
             self.assertEqual(getattr(mydata, field), value)
@@ -75,7 +78,9 @@ class TestIndexPage(TestCase):
         # testing file:
         f = open(f.name, 'r+')
         self.new_form_fields['photo'] = f
-        response = self.client.post(self.pdurl, data=self.new_form_fields)
+        response = self.client.post(
+            self.pdurl, data=self.new_form_fields,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         mydata = PersonalData.objects.get(id=1)
         self.assertEqual(mydata.photo, 'myphoto/' + os.path.basename(f.name))

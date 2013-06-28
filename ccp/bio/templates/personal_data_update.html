@@ -1,41 +1,56 @@
 {% extends 'base.html' %}
 {% block pagestyles %}
-    <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
+  <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+{% endblock %}
+{% block headerparams %}
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 {% endblock %}
 {% block content %}
+
+    
+
     <h3 class = 'header'>42 Coffee Cups Test Assignment</h3>
     <hr class = 'middle'/>
     {% if is_saved %}
         Personal data were successfully saved
     {% endif %}
-    <form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
-        <div class='left' align='left'>
-            <p> Name: {{ form.name }} </p>
-            <p> Surname: {{ form.surname }} </p>
-            <p> Birthdate: {{ form.birthdate }} </p>
-            <p> Photo: {{ form.photo }} </p>
-        </div>
-        <div class='left' align='left' style='height:250px'>
-            <p><b> Contacts: </b></p>
-            <p> Skype: {{ form.skype }} </p>
-            <p> Email: {{ form.email }} </p>
-            <p> Jabber: {{ form.jabber }} </p>
-        </div>
-        <div class='left' align='left'>
-            <p><img src="{{ MEDIA_URL }}{{ photo }}"/></p>
-        </div>
-        <div class='left' align='left'>
-            <p> Bio:<br/> {{ form.bio }} </p>
-            <p> Other Contacts:<br/> {{ form.other_contacts }} </p>
-        </div>
-        <div class='middle'>
-            <input type='submit' value='Save'> &nbsp; &nbsp;
-            <a href='/'>Cancel</a>
+    <form method='POST' action='{% url personal_data_update %}' enctype="multipart/form-data" id="contactform" disabled>{% csrf_token %}
+        <div id="ajaxwrapper">
+            <div class='left' align='left'>
+                <p> Name: {{ form.name }} </p>
+                <p> Surname: {{ form.surname }} </p>
+                <p> Birthdate: {{ form.birthdate }} </p>
+                <p> Photo: {{ form.photo }} </p>
+            </div>
+            <div class='left' align='left' style='height:250px'>
+                <p><b> Contacts: </b></p>
+                <p> Skype: {{ form.skype }} </p>
+                <p> Email: {{ form.email }} </p>
+                <p> Jabber: {{ form.jabber }} </p>
+            </div>
+            <div class='left' align='left'>
+                <p><img src="{{ MEDIA_URL }}{{ photo }}"/></p>
+            </div>
+            <div class='left' align='left'>
+                <p> Bio:<br/> {{ form.bio }} </p>
+                <p> Other Contacts:<br/> {{ form.other_contacts }} </p>
+            </div>
+            <div class='middle'>
+                <input type='submit' value='Save' id="sendbutton"> &nbsp; &nbsp;
+                <a href='/'>Cancel</a>
+            </div>
         </div>
     </form>
-    <div class='middle'>
+    <div class='middle' id="sendwrapper">
         <hr>
         <a href = "{% url stored_requests %}">requests</a>
     </div>
 
+{% endblock %}
+{% block javascript %}
+      <script src='{{ STATIC_URL }}js/ajax_form.js'>
+          
+      </script>
 {% endblock %}
