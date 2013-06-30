@@ -20,6 +20,7 @@ class Request(models.Model):
     meta = models.TextField()
     path = models.CharField(max_length=500)
     date_added = models.DateTimeField(auto_now_add=True)
+    priority = models.IntegerField(default=1)
 
     class Meta:
         get_latest_by = "date_added"
