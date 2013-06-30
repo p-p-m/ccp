@@ -6,7 +6,7 @@ from django.db import models
 
 def _print(s):
     sys.stdout.write(s+'\n')
-    sys.stderr.write(s+'\n')
+    sys.stderr.write('error:'+s+'\n')
 
 
 class Command(BaseCommand):

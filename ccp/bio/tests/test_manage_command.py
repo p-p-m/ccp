@@ -29,7 +29,8 @@ def test_modelscount_command():
     for attr in ('stdout', 'stderr'):
         redirected = _output(attr)
         l = lambda m: ':'.join([m.__name__, str(m.objects.count())])
-        expected = '\n'.join(_modelscount())
+        prefix = 'error:' if attr == 'stderr' else ''
+        expected = prefix + ('\n' + prefix).join(_modelscount())
         assert expected.strip() == redirected.getvalue().strip()
 
 
