@@ -41,6 +41,6 @@ def test_bash_script():
     f = open(os.path.join(settings.PROJECT_PATH, fname))
     names = [m.__name__ for m in models.get_models()]
     for l, n in zip(f, names):
-        assert n in l
+        assert n in l, 'n = ' + str(n) + '\n l = ' + str(l)
     f.close()
     os.remove(f.name)
