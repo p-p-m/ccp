@@ -40,6 +40,8 @@ def test_bash_script():
     fname = date.today().strftime('%m.%d.%Y') + '.dat'
     f = open(os.path.join(settings.PROJECT_PATH, fname), 'rb')
     names = [m.__name__ for m in models.get_models()]
+    for l in f:
+        print 'l', l
     for l, n in zip(f, names):
         assert n in l, 'n = ' + str(n) + '\n l = ' + str(l)
     f.close()
