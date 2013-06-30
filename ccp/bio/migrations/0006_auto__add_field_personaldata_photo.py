@@ -35,7 +35,6 @@ class Migration(SchemaMigration):
         },
         'bio.request': {
             'Meta': {'object_name': 'Request'},
-            'body': ('django.db.models.fields.CharField', [], {'max_length': '2000'}),
             'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'meta': ('django.db.models.fields.CharField', [], {'max_length': '2000'}),

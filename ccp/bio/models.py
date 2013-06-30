@@ -20,3 +20,14 @@ class Request(models.Model):
 
     class Meta:
         get_latest_by = "date_added"
+
+
+class DBSignal(models.Model):
+    table_name = models.CharField(max_length=100)
+    status = models.CharField(
+        max_length=20,
+        choices=(('created',)*2, ('modified',)*2, ('deleted',)*2))
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        get_latest_by = "date_added"
