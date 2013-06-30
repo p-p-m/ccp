@@ -24,7 +24,6 @@ class PersonalDataForm(forms.ModelForm):
 class DatepickerWidget(Widget):
 
     def render(self, name, value, attrs=None):
-        print 'value', value
         if isinstance(value, date):
             value = value.strftime('%m/%d/%Y')
         return render_to_string(

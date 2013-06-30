@@ -38,7 +38,7 @@ def test_bash_script():
     subprocess.call(
         ['sh', os.path.join(settings.PROJECT_PATH, 'modelscount.sh')])
     fname = date.today().strftime('%m.%d.%Y') + '.dat'
-    f = open(os.path.join(settings.PROJECT_PATH, fname))
+    f = open(os.path.join(settings.PROJECT_PATH, fname), 'rb')
     names = [m.__name__ for m in models.get_models()]
     for l, n in zip(f, names):
         assert n in l, 'n = ' + str(n) + '\n l = ' + str(l)
