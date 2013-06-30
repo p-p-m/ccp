@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import post_save, post_delete
+from django.db.utils import DatabaseError
+from django.dispatch.dispatcher import receiver
 
 
 class PersonalData(models.Model):
@@ -31,3 +34,31 @@ class DBSignal(models.Model):
 
     class Meta:
         get_latest_by = "date_added"
+
+
+def _db_signal(status, kwargs):
+    if DBSignal in models.get_models():
+        table_name = kwargs['instance'].__class__.__name__
+        if table_name != 'DBSignal':
+            # this try alows to awoid errors, when dbsignal table
+            # isn`t created from migrations, but other app tries to add
+            # some data from fixtures
+            try:
+                sign = DBSignal(table_name=table_name, status=status)
+                sign.save()
+            except DatabaseError as er:
+                if str(er) == 'no such table: bio_dbsignal':
+                    pass
+                else:
+                    raise er
+
+
+@receiver(post_save)
+def create_update_signal(sender, **kwargs):
+    status = 'created' if kwargs['created'] else 'modified'
+    _db_signal(status, kwargs)
+
+
+@receiver(post_delete)
+def delete_signal(sender, **kwargs):
+    _db_signal('deleted', kwargs)
