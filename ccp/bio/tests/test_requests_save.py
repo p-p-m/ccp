@@ -26,7 +26,6 @@ class TestRequestsInDB(TestCase):
             for attr in ('meta', 'path'):
                 self.assertContains(response, escape(getattr(req, attr)))
 
-        # testing that other requests aren`t on the page:
-        other_requests = Request.objects.order_by('date_added')[10:]
-        for req in other_requests:
-            self.assertNotContains(response, escape(req.meta))
+        # testing that only first ten request moves to page:
+        for req1, req2 in zip(response.context['stored_requests'], first_requests):
+            self.assertEqual(req1.date_added, req2.date_added)
