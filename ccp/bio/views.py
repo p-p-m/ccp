@@ -19,10 +19,14 @@ def stored_requests(request):
 def personal_data_update(request):
     form = PersonalDataForm(request.POST or None, files=request.FILES or None)
     is_saved = False
-    if form.is_valid() and request.is_ajax():
-        form.save()
-        is_saved = True
+    if request.is_ajax():
+        if form.is_valid():
+            is_saved = True
+            form.save()
+        photo = PersonalData.objects.get(id=1).photo
+        return render(
+            request, 'form.html', {'form': form, 'is_saved': is_saved, 'photo': photo})
     photo = PersonalData.objects.get(id=1).photo
     return render(
         request, 'personal_data_update.html',
-        {'form': form, 'is_saved': is_saved, 'photo': photo})
+        {'form': form, 'photo': photo})

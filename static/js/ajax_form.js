@@ -1,21 +1,20 @@
-jQuery(function() {
-    var form = jQuery("#contactform");
-    form.submit(function(e) {
-        jQuery("#sendbutton").attr('disabled', true)
-        form.find('input').attr('disabled', true);
-        form.find('textarea').attr('disabled', true);
-
-        jQuery("#sendwrapper").prepend('<span>Sending message, please wait... </span>')
-        jQuery("#ajaxwrapper").load(
-            form.attr('action') + ' #ajaxwrapper',
-            form.serializeArray(),
-            function(responseText, responseStatus) {
-                jQuery("#sendbutton").attr('disabled', false);
-                form.find('input').attr('disabled', false);
-                form.find('textarea').attr('disabled', false);
-                jQuery("#sendwrapper").find('span').remove();
+$(document).ready(function() { 
+    // bind 'myForm' and provide a simple callback function
+    var form = $("#contactform");
+    form.ajaxForm({
+            beforeSubmit: function() { 
+                $("#sendbutton").attr('disabled', true);
+                form.find('input').attr('readonly', true);
+                form.find('textarea').attr('readonly', true);
+                $("#sendwrapper").prepend('<span>Sending message, please wait... </span>')
+            },
+            success: function(data) {
+                $("#sendbutton").attr('disabled', false);
+                form.find('input').attr('readonly', false);
+                form.find('textarea').attr('readonly', false);
+                $("#sendwrapper").find('span').remove();
+                form.html(data);
             }
-        );
-        e.preventDefault(); 
-    });
-});
+        }
+    ); 
+}); 

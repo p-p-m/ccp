@@ -1,0 +1,29 @@
+<div id="ajaxwrapper">
+{% if is_saved %} Data successfully saved {% endif %}
+{{ form.non_field_errors }}
+{% csrf_token %}
+<div class='left' align='left'>
+    <p> Name: {{ form.name }} {{ form.name.errors }} </p>
+    <p> Surname: {{ form.surname }} {{ form.surname.errors }} </p>
+    <p> Birthdate: {{ form.birthdate }} {{ form.birthdate.errors }} </p>
+    <p> Photo: {{ form.photo }} {{ form.photo.errors }}</p>
+</div>
+<div class='left' align='left' style='height:250px'>
+    <p><b> Contacts: </b></p>
+    <p> Skype: {{ form.skype }} {{ form.skype.errors }} </p>
+    <p> Email: {{ form.email }} {{ form.email.errors }}  </p>
+    <p> Jabber: {{ form.jabber }} {{ form.jabber.errors }} </p>
+</div>
+<div class='left' align='left'>
+    <p><img src="{{ MEDIA_URL }}{{ photo }}"/></p>
+</div>
+<div class='left' align='left'>
+    <p> Bio:<br/> {{ form.bio }} {{ form.bio.errors }} </p>
+    <p> Other Contacts:<br/> 
+        {{ form.other_contacts }} {{ form.other_contacts.errors }} </p>
+</div>
+<div class='middle'>
+    <input type='submit' value='Save' id="sendbutton"> &nbsp; &nbsp;
+    <a href='/'>Cancel</a>
+</div>
+</div>
