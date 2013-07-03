@@ -40,7 +40,7 @@ class TestRequestsInDB(TestCase):
             req.save()
         test_data = {
             '-date_added': {'sort_by': 'date_added', 'order': '-'},
-            'priority': {'sort_by': 'priority', 'order': ''},
+            'priority': {'sort_by': 'priority', 'order': '+'},
             '-priority': {'sort_by': 'priority', 'order': '-'}
         }
         for key, value in test_data.iteritems():
