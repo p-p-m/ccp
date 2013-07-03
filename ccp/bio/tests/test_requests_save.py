@@ -48,6 +48,3 @@ class TestRequestsInDB(TestCase):
             requests = Request.objects.order_by(key)[:10]
             for req1, req2 in zip(response.context['stored_requests'], requests):
                 self.assertEqual(req1.date_added, req2.date_added)
-
-
-
