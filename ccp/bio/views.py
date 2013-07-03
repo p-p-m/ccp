@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from models import PersonalData, Request
-from forms import PersonalDataForm
+from forms import PersonalDataForm, SortForm
 
 
 def personal_data(request):
@@ -11,8 +11,10 @@ def personal_data(request):
 
 
 def stored_requests(request):
-    latest = Request.objects.order_by('date_added')[:10]
-    return render(request, 'stored_requests.html', {'stored_requests': latest})
+    form = SortForm(request.GET or None)
+    order = form.order_by() if form.is_valid() else 'date_added'
+    latest = Request.objects.order_by(order)[:10]
+    return render(request, 'stored_requests.html', {'stored_requests': latest, 'form': form})
 
 
 @login_required

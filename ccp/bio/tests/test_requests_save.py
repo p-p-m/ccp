@@ -1,3 +1,5 @@
+import random
+
 from django.test import TestCase
 from django.utils.html import escape
 from django.core.urlresolvers import reverse
@@ -29,3 +31,23 @@ class TestRequestsInDB(TestCase):
         # testing that only first ten request moves to page:
         for req1, req2 in zip(response.context['stored_requests'], first_requests):
             self.assertEqual(req1.date_added, req2.date_added)
+
+    def test_request_sort(self):
+        url = reverse('stored_requests')
+        # making some requests
+        for i in range(20):
+            self.client.get(url)
+        # adding random priority to requests
+        for req in Request.objects.all():
+            req.priority = random.randint(0, 10)
+            req.save()
+        test_data = {
+            '-date_added': {'sort_by': 'date_added', 'order': '-'},
+            'priority': {'sort_by': 'priority', 'order': '+'},
+            '-priority': {'sort_by': 'priority', 'order': '-'}
+        }
+        for key, value in test_data.iteritems():
+            response = self.client.get(url, value)
+            requests = Request.objects.order_by(key)[:10]
+            for req1, req2 in zip(response.context['stored_requests'], requests):
+                self.assertEqual(req1.date_added, req2.date_added)

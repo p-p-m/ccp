@@ -21,6 +21,17 @@ class PersonalDataForm(forms.ModelForm):
         self.fields['birthdate'].widget = DatepickerWidget()
 
 
+class SortForm(forms.Form):
+
+    sort_by = forms.ChoiceField(
+        choices=(('date_added', 'Date'), ('priority', 'Priority')))
+    order = forms.ChoiceField(
+        choices=(('+', 'Ascending'), ('-', 'Descending')))
+
+    def order_by(self):
+        return self.cleaned_data['order'].replace('+', '') + self.cleaned_data['sort_by']
+
+
 class DatepickerWidget(Widget):
 
     def render(self, name, value, attrs=None):

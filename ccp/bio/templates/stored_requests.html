@@ -4,18 +4,28 @@
         Stored requests
     </h3>
     <hr/>
+    <h4> Sorting: </h4>
+    <form action='' method='get'>
+        {{ form.as_p }}
+        <input type='submit' value='sort'>
+    </form>
+    <br/>
+    <hr/>
+    <br/>
     {% if stored_requests %}
     <table border=1>
         <tr>
             <th> Date added </th>
             <th> META </th>
             <th> path </th>
+            <th> priority </th>
         </tr>
         {% for r in stored_requests %}
         <tr>
             <td> {{ r.date_added }} </td>
             <td><textarea rows="10" cols="45" name="text"> {{ r.meta }} </textarea></td>
             <td> {{ r.path }} </td>
+            <td> {{ r.priority }} </td>
         </tr>
         {% endfor %}
     </table>
