@@ -23,7 +23,7 @@ class TestRequestsInDB(TestCase):
         # getting first 10 request from base and testing that they are at the page:
         first_requests = Request.objects.order_by('date_added')[:10]
         for req in first_requests:
-            for attr in ('meta', 'path'):
+            for attr in ('meta', 'path', 'priority'):
                 self.assertContains(response, escape(getattr(req, attr)))
 
         # testing that only first ten request moves to page:
