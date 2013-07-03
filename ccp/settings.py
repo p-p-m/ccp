@@ -210,6 +210,6 @@ LOGGING = {
     }
 }
 
-NOSE_ARGS = ['--with-doctest', '--exe']
+NOSE_ARGS = ['--exe']
 
 DEBUG = True

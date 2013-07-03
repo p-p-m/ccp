@@ -1,9 +1,11 @@
 from datetime import datetime
 
 from django.test import TestCase
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from bio.models import PersonalData
+from bio.templatetags.admin_edit_tags import edit_link
 
 
 class TestIndexPage(TestCase):
@@ -31,3 +33,7 @@ class TestIndexPage(TestCase):
         for field, value in self.mydata_fields.items():
             self.assertContains(response, field.title().replace('_', ' '))
             self.assertContains(response, value)
+
+    def test_edit_link(self):
+        adm = User.objects.get(id=1)
+        self.assertEqual(edit_link(adm), '/admin/auth/user/1/')
