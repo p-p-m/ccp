@@ -24,5 +24,5 @@ class TestRequestsInDB(TestCase):
 
         first_requests = Request.objects.order_by('date_added')[:10]
         for req in first_requests:
-            for attr in ('meta', 'path'):
+            for attr in ('meta', 'path', 'priority'):
                 self.assertContains(response, escape(getattr(req, attr)))
